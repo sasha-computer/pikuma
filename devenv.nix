@@ -4,6 +4,7 @@
   packages = [
     pkgs.SDL2
     pkgs.gcc
+    pkgs.cling
   ];
 
   languages.c.enable = true;
