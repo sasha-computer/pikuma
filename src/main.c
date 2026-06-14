@@ -93,12 +93,32 @@ void clear_color_buffer(uint32_t color) {
   }
 }
 
+// TODO:
+// Draw a background grid that fills the entire window.
+// Lines should be rendered at every row/col multiple of 10.
+void draw_grid(int spacing) {
+    uint32_t color_bg = 0xFF000000;
+    uint32_t color_grid = 0xFFFFFFFF;
+
+    for (int y = 0; y < window_height; y++) {
+        for (int x = 0; x < window_width; x++) {
+            if ((x % spacing) == 0 || (y % spacing) == 0) {
+                color_buffer[(window_width * y) + x] = color_grid;
+            } else {
+                color_buffer[(window_width * y) + x] = color_bg;
+            }
+        }
+    }
+}
+
 void render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 
+  draw_grid(100);
   render_color_buffer();
-  clear_color_buffer(0xFFFFFF00);
+
+  // clear_color_buffer(0xFFFFFF00);
 
   SDL_RenderPresent(renderer);
 }
